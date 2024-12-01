@@ -15,9 +15,15 @@ def press_buttons():
     buttons = ["img/1.png", "img/2.png", "img/plus.png", "img/7.png", "img/equals.png"]
 
     for button in buttons:
-        button_position = pyautogui.locateOnScreen(button, confidence=0.9)
-        pyautogui.click(button_position)
-        pyautogui.sleep(0.5)
+        try:
+            button_position = pyautogui.locateOnScreen(button, confidence=0.9)
+            if button_position:
+                pyautogui.click(button_position)
+                pyautogui.sleep(0.5)
+            else:
+                print(f"Кнопка '{button}' не найдена на экране.")
+        except Exception as e:
+            print(f"Произошла ошибка при обработке кнопки '{button}': {e}")
 
 
 if __name__ == "__main__":
